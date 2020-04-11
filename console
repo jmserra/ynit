@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+require_once 'bootstrap.php';
+
+if($argc <= 1)
+  die("Please specify a command\n");
+
+$command = ucfirst($argv[1]);
+
+$class = 'App\\Console\\'.$command;
+if(!class_exists($class))
+  die("Command '{$command}' doesn't exist\n");
+
+$params = array_slice($argv, 2);
+try{
+  (new $class(...$params))->handle();
+}
+catch(Exception $e){
+  echo "\033[01;31m ERROR\033[0m " . $e->getMessage() . "\n";
+  exit(1);
+}
