@@ -1,9 +1,8 @@
 <?php
-
-namespace Lib\Curl;
+namespace Lib\Net;
 use Exception;
 
-class Curl
+class Http
 {
     public $agent = 'Mozilla/5.0';
     public $last_http_code;
