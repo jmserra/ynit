@@ -100,7 +100,7 @@ function init_psr4_autoloader($namespace='App', $folder='src')
     }, true, true );
 }
 
-function make($key)
+function make($key, $arguments = [])
 {
     if(FALSE === strpos($key, '.'))
         $key = 'core.'.$key;
@@ -110,5 +110,20 @@ function make($key)
     if(!class_exists($class))
         throw new Exception("Cant make {$key} unable to find related class: {$class}");
 
-    return new $class;
+    return new $class(...$arguments);
+}
+
+function makeOne($key, $arguments = [])
+{
+    global $ynit_singleton;
+
+    if(isset($ynit_singleton[$key]))
+        return $ynit_singleton[$key];
+
+    return $ynit_singleton[$key] = make($key, $arguments);
+}
+
+function blade($file, $data = [])
+{
+    return makeOne('HTML.blade')->run($file,$data);
 }

@@ -9,6 +9,7 @@ else
 
 $router = make('router');
 $router->get('/', 'Controller@homepage');
+$router->get('/blade', 'Controller@blade');
 $router->get('/somepage/{bar}/is/{foo}', 'Controller@somepage');
 $router->get('/status', function(){ return 'alive'; });
 $router->serve();
