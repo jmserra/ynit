@@ -127,3 +127,8 @@ function blade($file, $data = [])
 {
     return makeOne('HTML.blade')->run($file,$data);
 }
+
+function collect(...$data)
+{
+    return new Lib\Core\Collection(...$data);
+}
